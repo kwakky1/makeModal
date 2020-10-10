@@ -28,6 +28,286 @@
   color: #61dafb;
 }
 
+.Modal {
+
+  color: #ffffff;
+}
+
+.Overlay {
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  width : 100%;
+  height: 100%;
+}
+.Wrapper {
+  box-sizing: border-box;
+  position: absolute;
+  top: 200px;
+  right: 0;
+  bottom: 0;
+  left: 200px;
+  z-index: 1001;
+  background-color: #ffffff;
+  width: 824px;
+  height: 485px;
+  overflow: auto;
+  outline: 0;
+  border-radius: 8px;
+  padding: 40px 84px;
+}
+.Inner {
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1001;
+  height: 100%;
+}
+.ModalTitle {
+  font-size: 32px;
+  font-family: NotoSansCJKkr-Bold;
+  color: #333333;
+  text-align: left;
+  line-height: 44px;
+}
+.StartTitle {
+  font-size: 14px;
+  font-family: NotoSansCJKkr-Medium;
+  color: #000000;
+  text-align: left;
+  letter-spacing: 0.9px;
+  margin-top: 56px;
+  margin-left: 8px;
+}
+
+.EndTitle {
+  font-size: 14px;
+  font-family: NotoSansCJKkr-Medium;
+  color: #000000;
+  text-align: left;
+  letter-spacing: 0.9px;
+  margin-top: 32px;
+  margin-left: 8px;
+}
+.Top {
+  text-align: left;
+  margin: 0 0 32px 0;
+}
+
+.Bottom {
+  text-align: right;
+}
+
+.Box1 {
+  width: 236px;
+  height: 44px;
+  border-radius: 8px;
+  text-align: left;
+  color: #efefef;
+  margin-top: 8px;
+  border: 1px #dadbdf solid;
+  display: inline-block;
+}
+
+.Box2 {
+  width: 152px;
+  height: 44px;
+  border-radius: 8px;
+  text-align: left;
+  color: #efefef;
+  margin-top: 8px;
+  border: 1px #dadbdf solid;
+  display: inline-block;
+  margin-left: 16px;
+}
+
+.Date {
+  text-align: left;
+  width: 164px;
+  height: 36px;
+  font-size: 16px;
+  font-family: NotoSansCJKkr-Regular;
+  line-height: 36px;
+  color: #000000;
+  display: inline-block;
+  margin: 4px 0 4px 16px;
+}
+
+.Time {
+  text-align: left;
+  width: 92px;
+  height: 36px;
+  font-size: 16px;
+  font-family: NotoSansCJKkr-Regular;
+  line-height: 36px;
+  color: #000000;
+  display: inline-block;
+  margin: 4px 0 4px 16px;
+}
+
+.ic_arrow_drop_down {
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+  float: right;
+  margin-top: 10px;
+  margin-right: 16px;
+}
+
+.Line {
+  width: 656px;
+  border-top: 1px #dadbdf solid;
+}
+.Btn {
+  width: 62px;
+  height: 44px;
+  border-radius: 8px;
+  background: #dadbdf;
+  display: inline-block;
+}
+
+.CompleteBtn {
+  width: 62px;
+  height: 44px;
+  border-radius: 8px;
+  background: #4c80f1;
+  display: inline-block;
+  margin-left: 16px;
+}
+
+.Text {
+  width: 30px;
+  height: 36px;
+  font-size: 16px;
+  font-family: NotoSansCJKkr-Medium;
+  color: #ffffff;
+  text-align: center;
+  margin: 4px 16px 4px 16px;
+  line-height: 36px;
+}
+
+.option_minute {
+  width: 152px;
+  height: 236px;
+  border-radius: 8px;
+  background: #ffffff;
+  box-sizing: border-box;
+  position: fixed;
+  z-index: 1002;
+  margin-top: 8px;
+  overflow-y: scroll;
+  box-shadow: 0 0 4px rgba(0,0,0,0.16);
+}
+
+.option_hour {
+  width: 152px;
+  height: 236px;
+  border-radius: 8px;
+  background: #ffffff;
+  box-sizing: border-box;
+  position: fixed;
+  z-index: 1002;
+  margin-top: 8px;
+  overflow-y: scroll;
+  box-shadow: 0 0 4px rgba(0,0,0,0.16);
+}
+
+.Calendar {
+  width: 320px;
+  height: 346px;
+  border-radius: 8px;
+  margin-top: 8px;
+  background: #f9f9f9;
+  position: fixed;
+  padding-top: 26px;
+}
+
+.Head {
+  width: 100%;
+  height: 36px;
+}
+
+.title {
+  text-align: left;
+  width: 99px;
+  height: 28px;
+  font-size: 18px;
+  font-family: NotoSansCJKkr-Medium;
+  line-height: 18px;
+  margin-left: 20px;
+  color: #000000;
+}
+.body {
+  box-sizing: border-box;
+  display: table;
+  position: relative;
+  width: 100%;
+  padding: 0 6px 15px 6px;
+  border-collapse:separate;
+  border-spacing:6px;
+}
+.row {
+  display: table-row;
+}
+.box {
+  display: table-cell;
+  border-radius: 25px;
+  width: calc(100%/7);
+  text-align: center;
+  padding-top: 1px;
+  padding-bottom: 3px;
+  margin: 6px;
+
+}
+
+.week_day {
+  width: 32px;
+  height: 22px;
+  font-family: NotoSansCJKkr-Medium;
+  font-size: 14px;
+  text-align: center;
+  color: #8a8a8f;
+}
+
+.week_number {
+  width: 32px;
+  height: 28px;
+  font-size: 18px;
+  color: #666666;
+  text-align: center;
+
+}
+
+.selected  {
+  background: #4c80f1;
+}
+
+.selected > span {
+  color: #ffffff;
+}
+
+.back_arrow {
+
+}
+
+.grayed > .week_number{
+  color: rgba(76, 128, 241, 0.2);
+}
+
+.grayed {
+
+}
+
+.Select {
+  margin: 0;
+  padding: 0;
+}
+
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
