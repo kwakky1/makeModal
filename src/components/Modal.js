@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import down_arrow from '../img/ic-arrow-drop-down.svg'
 import Minute from "./Minute";
 import Hour from "./Hour";
@@ -8,11 +8,11 @@ import moment from "moment";
 const Modal = ({openModal, setClose}) => {
 
     const [startDate, setStartDate] = useState(moment())
-    const [startHour, setStartHour] = useState(moment().format('HH'))
-    const [startMinute, setStartMinute] = useState(moment().format('mm'))
+    const [startHour, setStartHour] = useState('')
+    const [startMinute, setStartMinute] = useState('')
     const [endDate, setEndDate] = useState(moment())
-    const [endHour, setEndHour] = useState("오전 9시")
-    const [endMinute, setEndMinute] = useState("30분")
+    const [endHour, setEndHour] = useState('')
+    const [endMinute, setEndMinute] = useState('')
 
     const [handleEndMinute, setHandleEndMinute] = useState(false)
     const [handleEndHour, setHandleEndHour] = useState(false)
@@ -20,6 +20,38 @@ const Modal = ({openModal, setClose}) => {
     const [handleStartMinute, setHandleStartMinute] = useState(false)
     const [handleStartHour, setHandleStartHour] = useState(false)
     const [handleStartDate, setHandleStartDate] = useState(false)
+
+    useEffect(()=>{
+        let changeMinute = (Math.round(Number(moment().format('mm')) / 10) *10).toString()
+        if(changeMinute === '60') {
+            changeMinute = 0
+        }
+        setStartMinute(`${changeMinute}분`)
+        setEndMinute(`${changeMinute}분`)
+
+        let changeHour = moment().format('H')
+        if(changeHour === '0') {
+            changeHour = '오전 12시'
+        } else if(changeHour > 0 && changeHour < 12) {
+            changeHour = `오전 ${changeHour}시`
+        } else if(changeHour === '12') {
+            changeHour = `오후 12시`
+        } else {
+            changeHour = `오후 ${changeHour}시`
+        }
+        setStartHour(changeHour)
+        setEndHour(changeHour)
+    },[])
+
+    const complete = () => {
+        const startValue = `${startDate.format('yyyy년 MM월 DD일')} ${startHour} ${startMinute}`
+        const endValue = `${endDate.format('yyyy년 MM월 DD일')} ${endHour} ${endMinute}`
+        console.log(startValue)
+        console.log(endValue)
+        sessionStorage.setItem('start', JSON.stringify(startValue))
+        sessionStorage.setItem('end', JSON.stringify(endValue))
+        setClose(false)
+    }
 
     return (
         <>
@@ -91,16 +123,16 @@ const Modal = ({openModal, setClose}) => {
                             <img src={down_arrow} className="ic_arrow_drop_down" alt="#"/>
                             {
                                 handleEndMinute &&
-                                <Minute SetEndMinute={(value)=>{setEndMinute(value)}}/>
+                                <Minute setEndMinute={(value)=>{setEndMinute(value)}}/>
                             }
                         </div>
                     </div>
                     <div className="Bottom">
-                        <div className="Btn">
-                            <div className="Text" onClick={()=>setClose(false)}>취소</div>
+                        <div className="Btn" onClick={()=>setClose(false)}>
+                            <div className="Text">취소</div>
                         </div>
                         <div className="CompleteBtn">
-                            <div className="Text">완료</div>
+                            <div className="Text" onClick={complete}>완료</div>
                         </div>
                     </div>
                 </div>

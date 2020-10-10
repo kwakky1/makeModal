@@ -1,21 +1,20 @@
 import React from 'react';
 
-
 const Minute = ({setStartMinute, setEndMinute}) => {
     let minute = []
-    let i = 0
-    const setting = (setMinute) => {
+
+    const setting = (x) => {
         if(setStartMinute){
-            setStartMinute(setMinute)
+            setStartMinute(x)
         } else {
-            setEndMinute(setMinute)
+            setEndMinute(x)
         }
     }
 
     const minuteList = () => {
-        for(i = 0; i <= 50; i+=10){
+        for(let i = 0; i <= 50; i+=10){
             let setMinute = `${i}분`
-            minute.push(<li className="Time" onClick={setting(setMinute)}>{setMinute}</li>)
+            minute.push(<li key={i.toString()} className="Time" onClick={()=>{setting(setMinute)}}>{setMinute}</li>)
         }
         return minute
     }
