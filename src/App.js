@@ -4,12 +4,12 @@ import './App.css';
 import Modal from "./components/Modal";
 
 const App = () => {
-  const [open, setOpen] = useState(false)
+  const [handle, setHandle] = useState(false)
   const [startSession] = useState(JSON.parse(sessionStorage.getItem('start')))
   const [endSession] = useState(JSON.parse(sessionStorage.getItem('end')))
 
   const openModal = () => {
-    setOpen(!open)
+    setHandle(!handle)
   }
 
 
@@ -18,7 +18,7 @@ const App = () => {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <button onClick={openModal}>모달나와라</button>
-        <Modal openModal={open} setClose={(value)=>(setOpen(value))}/>
+        <Modal handle={handle} setHandle={(value)=>(setHandle(value))}/>
         <h1>{startSession}</h1>
         <h1>{endSession}</h1>
       </header>

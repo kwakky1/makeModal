@@ -229,6 +229,7 @@
 .Head {
   width: 100%;
   height: 36px;
+  margin-bottom: 30px;
 }
 
 .title {
@@ -290,10 +291,6 @@
   color: #ffffff;
 }
 
-.back_arrow {
-
-}
-
 .grayed > .week_number{
   color: rgba(76, 128, 241, 0.2);
 }
@@ -307,6 +304,15 @@
   padding: 0;
 }
 
+.forward_arrow {
+  margin-left: 22px;
+  display: inline-block;
+}
+
+.back_arrow {
+  margin-left: 115px;
+  display: inline-block;
+}
 
 @keyframes App-logo-spin {
   from {
