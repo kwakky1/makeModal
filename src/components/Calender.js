@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import moment from "moment";
 import forward_arrow from '../img/ic-arrow-forward.svg'
-import back_arrow from '../img/btn-arrow-back.svg'
+import back_arrow from '../img/ic-arrow-back.svg'
 import {useDispatch} from "react-redux";
 import {startAction} from "../reducer/StartReducer";
 import {endAction} from "../reducer/EndReducer";

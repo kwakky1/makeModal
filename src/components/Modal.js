@@ -73,10 +73,14 @@ const Modal = ({handle, setHandle}) => {
         sessionStorage.setItem('end', JSON.stringify(endValue))
         setHandle(false)
     }
+    const cancel = () => {
+        setHandle(false)
+        window.location.reload()
+    }
 
     return (
         <>
-            { handle && <div className="Overlay" onClick={()=>setHandle(false)}/>}
+            { handle && <div className="Overlay" onClick={cancel}/>}
             { handle && <div className="Wrapper" >
                 <div className="Inner">
                     <div className="ModalTitle">응시 기간 설정</div>
@@ -149,7 +153,7 @@ const Modal = ({handle, setHandle}) => {
                         </div>
                     </div>
                     <div className="Bottom">
-                        <div className="Btn" onClick={()=>setHandle(false)}>
+                        <div className="Btn" onClick={cancel}>
                             <div className="Text">취소</div>
                         </div>
                         <div className="CompleteBtn">

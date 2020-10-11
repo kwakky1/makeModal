@@ -8,7 +8,6 @@ import EndDateReducer from "./EndDateReducer";
 import EndHourReducer from "./EndHourReducer";
 import EndMinuteReducer from "./EndMinuteReducer";
 
-
 const rootReducer = combineReducers({
     StartReducer,
     StartDateReducer,

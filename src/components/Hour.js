@@ -23,7 +23,7 @@ const Hour = ({setStartHour, setEndHour }) => {
             } else {
                 value = `오후 12시`
             }
-            timeList.push(<li key={i.toString()} onClick={()=>{setting(value)}} className="Time">{value}</li>)
+            timeList.push(<li key={i.toString()} onClick={()=>{setting(value)}} className="time_select_box">{value}</li>)
         }
         return timeList
     }

@@ -14,7 +14,7 @@ const Minute = ({setStartMinute, setEndMinute}) => {
     const minuteList = () => {
         for(let i = 0; i <= 50; i+=10){
             let setMinute = `${i}분`
-            minute.push(<li key={i.toString()} className="Time" onClick={()=>{setting(setMinute)}}>{setMinute}</li>)
+            minute.push(<li key={i.toString()} className="time_select_box" onClick={()=>{setting(setMinute)}}>{setMinute}</li>)
         }
         return minute
     }
