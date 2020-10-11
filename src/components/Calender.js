@@ -5,8 +5,6 @@ import back_arrow from '../img/ic-arrow-back.svg'
 import {useDispatch} from "react-redux";
 import {startAction} from "../reducer/StartReducer";
 import {endAction} from "../reducer/EndReducer";
-import {startDateAction} from "../reducer/StartDateReducer";
-import {endDateAction} from "../reducer/EndDateReducer";
 
 const Calender = ({setStartDate, setEndDate, startDate, endDate}) => {
 
@@ -35,12 +33,9 @@ const Calender = ({setStartDate, setEndDate, startDate, endDate}) => {
                                 if(setStartDate){
                                     setStartDate(current)
                                     setEndDate(current)
-                                    dispatch(startDateAction(current))
-                                    /*dispatch(endDateAction(current))*/
                                     dispatch(startAction(false))
                                 } else {
                                     setEndDate(current)
-                                    /*dispatch(endDateAction(current))*/
                                     dispatch(endAction(false))
                                 }
                             }

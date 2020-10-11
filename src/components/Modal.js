@@ -25,9 +25,6 @@ const Modal = ({handle, setHandle}) => {
     const handleStartResult = useSelector(state => state.StartReducer)
     const handleEndResult = useSelector(state => state.EndReducer)
 
-    const startDateResult = useSelector(state => state.StartDateReducer)
-    const endDateResult = useSelector(state => state.EndDateReducer)
-
     useEffect(()=>{
         setHandleStartDate(handleStartResult.data)
     }, [handleStartResult])
@@ -36,13 +33,6 @@ const Modal = ({handle, setHandle}) => {
         setHandleEndDate(handleEndResult.data)
     }, [handleEndResult])
 
-    useEffect(()=>{
-        /*setStartDate(startDateResult.data)*/
-    },[startDateResult])
-
-    /*useEffect(()=>{
-        setEndDate(endDateResult)
-    },[endDateResult])*/
 
     useEffect(()=>{
             let changeMinute = (Math.round(Number(moment().format('mm')) / 10) *10).toString()
