@@ -2,11 +2,17 @@ import React, {useState} from 'react';
 import moment from "moment";
 import forward_arrow from '../img/ic-arrow-forward.svg'
 import back_arrow from '../img/btn-arrow-back.svg'
+import {useDispatch} from "react-redux";
+import {startAction} from "../reducer/StartReducer";
+import {endAction} from "../reducer/EndReducer";
+import {startDateAction} from "../reducer/StartDateReducer";
+import {endDateAction} from "../reducer/EndDateReducer";
 
-const Calender = ({setStartDate, setEndDate, startDate, endDate, setHandleEndDate}) => {
+const Calender = ({setStartDate, setEndDate, startDate, endDate}) => {
 
     const [today, setToday] = useState(moment())
 
+    const dispatch = useDispatch()
     const generate = () => {
         const date = setStartDate ? moment(startDate) : moment(endDate)
         const yesterday = moment().add(-1, "day")
@@ -29,11 +35,14 @@ const Calender = ({setStartDate, setEndDate, startDate, endDate, setHandleEndDat
                                 if(setStartDate){
                                     setStartDate(current)
                                     setEndDate(current)
+                                    dispatch(startDateAction(current))
+                                    /*dispatch(endDateAction(current))*/
+                                    dispatch(startAction(false))
                                 } else {
                                     setEndDate(current)
-                                    setHandleEndDate(false)
+                                    /*dispatch(endDateAction(current))*/
+                                    dispatch(endAction(false))
                                 }
-
                             }
                             return (
                                 <div className={`box  ${isSelected} ${isGrayed} `} key={i} onClick={setting} aria-disabled={!isGrayed} >
@@ -52,11 +61,11 @@ const Calender = ({setStartDate, setEndDate, startDate, endDate, setHandleEndDat
         <>
             <div className="Calendar">
                 <div className="Head">
-                    <span className="title">{moment().format('yyyy년 MM월')}</span>
-                    <div className="back_arrow" onClick={(e)=>{setToday(today.clone().subtract(1,'month'))}}>
+                    <span className="title">{today.format('yyyy년 MM월')}</span>
+                    <div className="back_arrow" onClick={()=>{setToday(today.clone().subtract(1,'month'))}}>
                         <img src={back_arrow} alt="#"/>
                     </div>
-                    <div className="forward_arrow" onClick={(e)=>{setToday(today.clone().add(1,'month'))}}>
+                    <div className="forward_arrow" onClick={()=>{setToday(today.clone().add(1,'month'))}}>
                         <img src={forward_arrow} alt="#"/>
                     </div>
                 </div>

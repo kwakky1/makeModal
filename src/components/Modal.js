@@ -4,6 +4,7 @@ import Minute from "./Minute";
 import Hour from "./Hour";
 import Calender from "./Calender";
 import moment from "moment";
+import {useSelector} from "react-redux";
 
 const Modal = ({handle, setHandle}) => {
 
@@ -21,59 +22,77 @@ const Modal = ({handle, setHandle}) => {
     const [handleStartHour, setHandleStartHour] = useState(false)
     const [handleStartDate, setHandleStartDate] = useState(false)
 
-    useEffect(()=>{
-        let changeMinute = (Math.round(Number(moment().format('mm')) / 10) *10).toString()
-        if(changeMinute === '60') {
-            changeMinute = 0
-        }
-        setStartMinute(`${changeMinute}분`)
-        setEndMinute(`${changeMinute}분`)
+    const handleStartResult = useSelector(state => state.StartReducer)
+    const handleEndResult = useSelector(state => state.EndReducer)
 
-        let changeHour = moment().format('H')
-        if(changeHour === '0') {
-            changeHour = '오전 12시'
-        } else if(changeHour > 0 && changeHour < 12) {
-            changeHour = `오전 ${changeHour}시`
-        } else if(changeHour === '12') {
-            changeHour = `오후 12시`
-        } else {
-            changeHour = `오후 ${changeHour-12}시`
-        }
-        setStartHour(changeHour)
-        setEndHour(changeHour)
+    const startDateResult = useSelector(state => state.StartDateReducer)
+    const endDateResult = useSelector(state => state.EndDateReducer)
+
+    useEffect(()=>{
+        setHandleStartDate(handleStartResult.data)
+    }, [handleStartResult])
+
+    useEffect(()=>{
+        setHandleEndDate(handleEndResult.data)
+    }, [handleEndResult])
+
+    useEffect(()=>{
+        /*setStartDate(startDateResult.data)*/
+    },[startDateResult])
+
+    /*useEffect(()=>{
+        setEndDate(endDateResult)
+    },[endDateResult])*/
+
+    useEffect(()=>{
+            let changeMinute = (Math.round(Number(moment().format('mm')) / 10) *10).toString()
+            if(changeMinute === '60') {
+                changeMinute = 0
+            }
+            setStartMinute(`${changeMinute}분`)
+            setEndMinute(`${changeMinute}분`)
+
+            let changeHour = moment().format('H')
+            if(changeHour === '0') {
+                changeHour = '오전 12시'
+            } else if(changeHour > 0 && changeHour < 12) {
+                changeHour = `오전 ${changeHour}시`
+            } else if(changeHour === '12') {
+                changeHour = `오후 12시`
+            } else {
+                changeHour = `오후 ${changeHour-12}시`
+            }
+            setStartHour(changeHour)
+            setEndHour(changeHour)
     },[])
 
-    const complete = (e) => {
-        e.preventDefault()
+    const complete = () => {
         const startValue = `${startDate.format('yyyy년 MM월 DD일')} ${startHour} ${startMinute}`
         const endValue = `${endDate.format('yyyy년 MM월 DD일')} ${endHour} ${endMinute}`
-        console.log(startValue)
-        console.log(endValue)
         sessionStorage.setItem('start', JSON.stringify(startValue))
         sessionStorage.setItem('end', JSON.stringify(endValue))
         setHandle(false)
-        window.location.reload()
     }
 
     return (
         <>
-            { handle && <div className="Overlay" onClick={(e)=>setHandle(false)}/>}
+            { handle && <div className="Overlay" onClick={()=>setHandle(false)}/>}
             { handle && <div className="Wrapper" >
                 <div className="Inner">
                     <div className="ModalTitle">응시 기간 설정</div>
                     <div className="StartTitle">응시 시작일</div>
                     <div className="Top">
-                        <div className="Box1" onClick={(e)=>{setHandleStartDate(!handleStartDate)}}>
+                        <div className="Box1" onClick={()=>{setHandleStartDate(true)}}>
                             <div className="Date">
                                 {startDate.format('yyyy년 MM월 DD일')}
                             </div>
                             <img src={down_arrow} className="ic_arrow_drop_down" alt="#"/>
                             {
                                 handleStartDate &&
-                                <Calender startDate={startDate} setStartDate={(value)=>{setStartDate(value)}} setEndDate={(value)=>{setEndDate(value)}}/>
+                                <Calender setHandleStartDate={(value)=> {setHandleStartDate(value)}} startDate={startDate} setStartDate={(value)=>{setStartDate(value)}} setEndDate={(value)=>{setEndDate(value)}}/>
                             }
                         </div>
-                        <div className="Box2" onClick={(e)=>{setHandleStartHour(!handleStartHour)}}>
+                        <div className="Box2" onClick={()=>{setHandleStartHour(!handleStartHour)}}>
                             <div className="Time">
                                 {startHour}
                             </div>
@@ -83,7 +102,7 @@ const Modal = ({handle, setHandle}) => {
                                 <Hour setStartHour={(value)=>{setStartHour(value)}}/>
                             }
                         </div>
-                        <div className="Box2" onClick={(e)=>{setHandleStartMinute(!handleStartMinute)}}>
+                        <div className="Box2" onClick={()=>{setHandleStartMinute(!handleStartMinute)}}>
                             <div className="Time">
                                 {startMinute}
                             </div>
@@ -97,7 +116,7 @@ const Modal = ({handle, setHandle}) => {
                     <hr className="Line"/>
                     <div className="EndTitle">응시 마감일</div>
                     <div className="Top">
-                        <div className="Box1" onClick={(e)=>{setHandleEndDate(!handleEndDate)}}>
+                        <div className="Box1" onClick={()=> {setHandleEndDate(true)}}>
                             <div className="Date">
                                 {endDate.format('yyyy년 MM월 DD일')}
                             </div>
@@ -107,7 +126,7 @@ const Modal = ({handle, setHandle}) => {
                                 <Calender startDate={startDate} endDate={endDate} setEndDate={(value)=>{setEndDate(value)}} setHandleEndDate={(value)=>{setHandleEndDate(value)}}/>
                             }
                         </div>
-                        <div className="Box2" onClick={(e)=>{setHandleEndHour(!handleEndHour)}}>
+                        <div className="Box2" onClick={()=>{setHandleEndHour(!handleEndHour)}}>
                             <div className="Time">
                                 {endHour}
                             </div>
@@ -118,7 +137,7 @@ const Modal = ({handle, setHandle}) => {
                             }
                         </div>
 
-                        <div className="Box2" onClick={(e)=>setHandleEndMinute(!handleEndMinute)}>
+                        <div className="Box2" onClick={()=>setHandleEndMinute(!handleEndMinute)}>
                             <div className="Time">
                                 {endMinute}
                             </div>
@@ -130,7 +149,7 @@ const Modal = ({handle, setHandle}) => {
                         </div>
                     </div>
                     <div className="Bottom">
-                        <div className="Btn" onClick={(e)=>setHandle(false)}>
+                        <div className="Btn" onClick={()=>setHandle(false)}>
                             <div className="Text">취소</div>
                         </div>
                         <div className="CompleteBtn">
