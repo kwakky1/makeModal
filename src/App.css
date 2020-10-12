@@ -48,10 +48,10 @@
 .Wrapper {
   box-sizing: border-box;
   position: absolute;
-  top: 230px;
+  top: 23%;
   right: 0;
   bottom: 0;
-  left: 485px;
+  left: 27%;
   z-index: 1001;
   background-color: #ffffff;
   width: 824px;
@@ -129,6 +129,10 @@
 
 .Box2:hover {
   background: #f9f9f9;
+}
+
+.box_active {
+  background: #efefef;
 }
 
 .Date {
@@ -220,6 +224,7 @@
   position: fixed;
   z-index: 1002;
   margin-top: 8px;
+  margin-left: 425px;
   overflow-y: scroll;
   box-shadow: 0 0 4px rgba(0,0,0,0.16);
 }
@@ -235,6 +240,7 @@
   margin-top: 8px;
   overflow-y: scroll;
   box-shadow: 0 0 4px rgba(0,0,0,0.16);
+  margin-left: 255px;
 }
 
 .Calendar {
@@ -296,8 +302,6 @@
   border-radius: 25px;
   width: calc(100%/7);
   text-align: center;
-  padding-top: 1px;
-  padding-bottom: 3px;
   margin: 6px;
 }
 
@@ -316,6 +320,8 @@
   color: #ffffff;
 }
 
+
+
 .week_day {
   width: 32px;
   height: 22px;
@@ -326,28 +332,30 @@
 }
 
 .week_number {
+  display: block;
   width: 32px;
   height: 28px;
   font-size: 18px;
   color: #666666;
+  margin-top: 8px;
+  margin-left: 2px;
+  margin-bottom: 2px;
   text-align: center;
-
 }
 
-.selected  {
+.selected {
   background: #4c80f1;
 }
 
-.selected > span {
+.selected > .week_number {
+  color: #ffffff;
+}
+.selected.grayed > .week_number {
   color: #ffffff;
 }
 
 .grayed > .week_number{
   color: rgba(76, 128, 241, 0.2);
-}
-
-.grayed {
-
 }
 
 .Select {

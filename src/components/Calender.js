@@ -3,46 +3,71 @@ import moment from "moment";
 import forward_arrow from '../img/ic-arrow-forward.svg'
 import back_arrow from '../img/ic-arrow-back.svg'
 import {useDispatch} from "react-redux";
-import {startAction} from "../reducer/StartReducer";
 import {endAction} from "../reducer/EndReducer";
 
 const Calender = ({setStartDate, setEndDate, startDate, endDate}) => {
 
     const [today, setToday] = useState(moment())
-    const [from, setFrom] = useState()
-    const [to, setTo] = useState()
-
     const dispatch = useDispatch()
+    const [range] = useState([])
     const generate = () => {
         const date = setStartDate ? moment(startDate) : moment(endDate)
         const yesterday = moment().add(-1, "day")
-        const startDate_m = moment(startDate).add(-1,"day");
-        const startWeek = today.clone().startOf('month').week();
-        const endWeek = today.clone().endOf('month').week() === 1 ? 53 : today.clone().endOf('month').week();
+        const startWeek = today.clone().startOf('month').isoWeek() >= 52 ? 0 : today.clone().startOf('month').isoWeek();
+        const endWeek = today.clone().endOf('month').isoWeek() === 1 ? 53 : today.clone().endOf('month').isoWeek();
         let calendar = [];
         for (let week = startWeek; week <= endWeek; week++) {
             calendar.push(
                 <div className="row" key={week}>
                     {
-                        Array(7).fill(1).map((n, i) => {
-                            let current = today.clone().week(week).startOf('week').add(n + i, 'day')
-                            let isSelected = date.format('YYYYMMDD') === current.format('YYYYMMDD') || (current >= startDate && current <= endDate) ? 'selected' : '';
-                            let isGrayed = current.format('MM') !== today.format('MM') || (!setStartDate && startDate_m >= current) || yesterday > current ? 'grayed' : '';
+                        Array(7).fill(0).map((n, i) => {
+                            let current = today.clone().isoWeek(week).startOf('isoWeek').add(n + i, 'day')
+                            let isSelected = (startDate.format("YYYYMMDD") !== endDate.format('YYYYMMDD')) && (date.format('YYYYMMDD') === current.format('YYYYMMDD') || (current >= startDate && current <= endDate)) ? 'selected' : '';
+                            let isGrayed = current.format('MM') !== today.format('MM') || yesterday > current ? 'grayed' : '';
                             const setting = () => {
+                                if(range.length === 1) {
+                                    range.push(current)
+                                    range.sort((a,b)=>{
+                                        return a-b;
+                                    })
+                                    setStartDate(range[0])
+                                    setEndDate(range[1])
+                                } else if (range.length === 2) {
+                                    range.sort((a,b)=>{
+                                        return a-b
+                                    })
+                                    if(Number(range[0].format('YYYYMMDD')) <= Number(current.format('YYYYMMDD')) && Number(range[1].format('YYYYMMDD')) >= Number(current.format('YYYYMMDD'))) {
+                                        if(Math.abs(Number(range[0].format("YYYYMMDD"))-Number(current.format(("YYYYMMDD")))) >= Math.abs(Number(range[1].format("YYYYMMDD"))-Number(current.format(("YYYYMMDD"))))){
+                                            range.pop()
+                                            range.push(current)
+                                            setStartDate(range[0])
+                                            setEndDate(range[1])
+                                        } else {
+                                            range.shift()
+                                            range.push(current)
+                                            range.sort((a,b) => {
+                                                return a-b
+                                            })
+                                            setStartDate(range[0])
+                                            setEndDate(range[1])
+                                        }
+                                    } else {
+                                        range.shift()
+                                        range.shift()
+                                        setStartDate(current)
+                                        range.push(current)
+                                        setEndDate(moment())
+                                    }
+                                } else if (range.length === 0) {
+                                    range.push(current)
+                                    setStartDate(range[0])
+                                }
                                 if(isGrayed) {
                                     return
                                 }
-                                if(setStartDate){
-                                    setStartDate(current)
-                                    setEndDate(current)
-                                    dispatch(startAction(false))
-                                } else {
-                                    setEndDate(current)
-                                    dispatch(endAction(false))
-                                }
                             }
                             return (
-                                <div className={`box  ${isSelected} ${isGrayed} `} key={i} onClick={setting} aria-disabled={!isGrayed} >
+                                <div className={`box  ${isGrayed}  ${isSelected}   `} key={i} onClick={setting} aria-disabled={!isGrayed} >
                                     <span className={`week_number`} >{current.format('D')}</span>
                                 </div>
                             )
