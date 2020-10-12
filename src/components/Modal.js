@@ -78,16 +78,17 @@ const Modal = ({handle, setHandle}) => {
                     <div className="ModalTitle">응시 기간 설정</div>
                     <div className="StartTitle">응시 시작일</div>
                     <div className="Top">
-                        <div className="Box1" onClick={()=>{setHandleStartDate(true)}}>
+                        <div className="Box1" onClick={()=>{setHandleStartDate(!handleStartDate)}}>
                             <div className="Date">
                                 {startDate.format('yyyy년 MM월 DD일')}
                             </div>
                             <img src={down_arrow} className="ic_arrow_drop_down" alt="#"/>
-                            {
-                                handleStartDate &&
-                                <Calender setHandleStartDate={(value)=> {setHandleStartDate(value)}} startDate={startDate} setStartDate={(value)=>{setStartDate(value)}} setEndDate={(value)=>{setEndDate(value)}}/>
-                            }
+
                         </div>
+                        {
+                            handleStartDate &&
+                            <Calender setHandleStartDate={(value)=> {setHandleStartDate(value)}} startDate={startDate} setStartDate={(value)=>{setStartDate(value)}} setEndDate={(value)=>{setEndDate(value)}}/>
+                        }
                         <div className="Box2" onClick={()=>{setHandleStartHour(!handleStartHour)}}>
                             <div className="Time">
                                 {startHour}
@@ -112,16 +113,17 @@ const Modal = ({handle, setHandle}) => {
                     <hr className="Line"/>
                     <div className="EndTitle">응시 마감일</div>
                     <div className="Top">
-                        <div className="Box1" onClick={()=> {setHandleEndDate(true)}}>
+                        <div className="Box1" onClick={()=> {setHandleEndDate(!handleEndDate)}}>
                             <div className="Date">
                                 {endDate.format('yyyy년 MM월 DD일')}
                             </div>
                             <img src={down_arrow} className="ic_arrow_drop_down" alt="#"/>
-                            {
-                                handleEndDate &&
-                                <Calender startDate={startDate} endDate={endDate} setEndDate={(value)=>{setEndDate(value)}} setHandleEndDate={(value)=>{setHandleEndDate(value)}}/>
-                            }
+
                         </div>
+                        {
+                            handleEndDate &&
+                            <Calender startDate={startDate} endDate={endDate} setEndDate={(value)=>{setEndDate(value)}} setHandleEndDate={(value)=>{setHandleEndDate(value)}}/>
+                        }
                         <div className="Box2" onClick={()=>{setHandleEndHour(!handleEndHour)}}>
                             <div className="Time">
                                 {endHour}

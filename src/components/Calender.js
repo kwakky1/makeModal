@@ -9,6 +9,8 @@ import {endAction} from "../reducer/EndReducer";
 const Calender = ({setStartDate, setEndDate, startDate, endDate}) => {
 
     const [today, setToday] = useState(moment())
+    const [from, setFrom] = useState()
+    const [to, setTo] = useState()
 
     const dispatch = useDispatch()
     const generate = () => {
@@ -24,7 +26,7 @@ const Calender = ({setStartDate, setEndDate, startDate, endDate}) => {
                     {
                         Array(7).fill(1).map((n, i) => {
                             let current = today.clone().week(week).startOf('week').add(n + i, 'day')
-                            let isSelected = date.format('YYYYMMDD') === current.format('YYYYMMDD') ? 'selected' : '';
+                            let isSelected = date.format('YYYYMMDD') === current.format('YYYYMMDD') || (current >= startDate && current <= endDate) ? 'selected' : '';
                             let isGrayed = current.format('MM') !== today.format('MM') || (!setStartDate && startDate_m >= current) || yesterday > current ? 'grayed' : '';
                             const setting = () => {
                                 if(isGrayed) {
@@ -56,35 +58,37 @@ const Calender = ({setStartDate, setEndDate, startDate, endDate}) => {
         <>
             <div className="Calendar">
                 <div className="Head">
-                    <span className="title">{today.format('yyyy년 MM월')}</span>
-                    <div className="back_arrow" onClick={()=>{setToday(today.clone().subtract(1,'month'))}}>
-                        <img src={back_arrow} alt="#"/>
-                    </div>
-                    <div className="forward_arrow" onClick={()=>{setToday(today.clone().add(1,'month'))}}>
-                        <img src={forward_arrow} alt="#"/>
+                    <div className="title">{today.format('yyyy년 MM월')}</div>
+                    <div className="arrow_box">
+                        <div className="back_arrow" onClick={()=>{setToday(today.clone().subtract(1,'month'))}}>
+                            <img className="back_image" src={back_arrow} alt="#"/>
+                        </div>
+                        <div className="forward_arrow" onClick={()=>{setToday(today.clone().add(1,'month'))}}>
+                            <img className="forward_image" src={forward_arrow} alt="#"/>
+                        </div>
                     </div>
                 </div>
                 <div className="body">
                     <div className="row">
-                        <div className="box">
+                        <div className="box_top">
                             <span className="week_day">월</span>
                         </div>
-                        <div className="box">
+                        <div className="box_top">
                             <span className="week_day">화</span>
                         </div>
-                        <div className="box">
+                        <div className="box_top">
                             <span className="week_day">수</span>
                         </div>
-                        <div className="box">
+                        <div className="box_top">
                             <span className="week_day">목</span>
                         </div>
-                        <div className="box">
+                        <div className="box_top">
                             <span className="week_day">금</span>
                         </div>
-                        <div className="box">
+                        <div className="box_top">
                             <span className="week_day">토</span>
                         </div>
-                        <div className="box">
+                        <div className="box_top">
                             <span className="week_day">일</span>
                         </div>
                     </div>
