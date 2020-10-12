@@ -22,10 +22,30 @@ const Modal = ({handle, setHandle}) => {
     const [handleEndMinute, setHandleEndMinute] = useState(false)
 
     const handleDateResult = useSelector(state => state.DateReducer)
+    const handleStartHourResult = useSelector(state => state.StartHourReducer)
+    const handleEndHourResult = useSelector(state => state.EndHourReducer)
+    const handleStartMinuteResult = useSelector(state => state.StartMinuteReducer)
+    const handleEndMinuteResult = useSelector(state => state.EndMinuteReducer)
 
     useEffect(()=>{
         setHandleEndDate(handleDateResult.data)
     }, [handleDateResult])
+
+    useEffect(()=>{
+        setHandleStartHour(handleStartHourResult.data)
+    },[handleStartHourResult])
+
+    useEffect(()=>{
+        setHandleEndHour(handleEndHourResult.data)
+    },[handleEndHourResult])
+
+    useEffect(()=>{
+        setHandleStartMinute(handleStartMinuteResult.data)
+    },[handleStartMinuteResult])
+
+    useEffect(()=>{
+        setHandleEndMinute(handleEndMinuteResult.data)
+    },[handleEndMinuteResult])
 
 
     useEffect(()=>{

@@ -1,13 +1,18 @@
 import React from 'react';
+import {useDispatch} from "react-redux";
+import {startHourAction} from "../reducer/StartHourReducer";
+import {endHourAction} from "../reducer/EndHourReducer";
 
 const Hour = ({setStartHour, setEndHour }) => {
     let timeList = []
-
+    const dispatch = useDispatch()
     const setting = (value) => {
         if(setStartHour) {
             setStartHour(value)
+            dispatch(startHourAction(false))
         } else {
             setEndHour(value)
+            dispatch(endHourAction(false))
         }
     }
 

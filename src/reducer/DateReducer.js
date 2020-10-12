@@ -1,6 +1,6 @@
 const DATE_RESULT = 'DATE_RESULT'
 
-export const endAction = data => ({
+export const dateAction = data => ({
     type: DATE_RESULT,
     data: data
 })

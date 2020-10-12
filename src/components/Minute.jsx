@@ -1,13 +1,18 @@
 import React from 'react';
+import {useDispatch} from "react-redux";
+import {startMinuteAction} from "../reducer/StartMinuteReducer";
+import {endMinuteAction} from "../reducer/EndMinuteReducer";
 
 const Minute = ({setStartMinute, setEndMinute}) => {
     let minute = []
-
+    const dispatch = useDispatch()
     const setting = (x) => {
         if(setStartMinute){
             setStartMinute(x)
+            dispatch(startMinuteAction(false))
         } else {
             setEndMinute(x)
+            dispatch(endMinuteAction(false))
         }
     }
 
