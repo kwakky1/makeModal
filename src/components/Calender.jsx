@@ -2,13 +2,10 @@ import React, {useState} from 'react';
 import moment from "moment";
 import forward_arrow from '../img/ic-arrow-forward.svg'
 import back_arrow from '../img/ic-arrow-back.svg'
-import {useDispatch} from "react-redux";
-import {endAction} from "../reducer/EndReducer";
 
 const Calender = ({setStartDate, setEndDate, startDate, endDate}) => {
 
     const [today, setToday] = useState(moment())
-    const dispatch = useDispatch()
     const [range] = useState([])
     const generate = () => {
         const date = setStartDate ? moment(startDate) : moment(endDate)

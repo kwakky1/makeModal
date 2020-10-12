@@ -1,10 +1,8 @@
 import {combineReducers} from "redux";
-import StartReducer from "./StartReducer";
-import EndReducer from "./EndReducer";
+import DateReducer from "./DateReducer";
 
 const rootReducer = combineReducers({
-    StartReducer,
-    EndReducer,
+    DateReducer,
 })
 
 export default rootReducer;

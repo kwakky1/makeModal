@@ -21,11 +21,11 @@ const Modal = ({handle, setHandle}) => {
     const [handleEndHour, setHandleEndHour] = useState(false)
     const [handleEndMinute, setHandleEndMinute] = useState(false)
 
-    const handleEndResult = useSelector(state => state.EndReducer)
+    const handleDateResult = useSelector(state => state.DateReducer)
 
     useEffect(()=>{
-        setHandleEndDate(handleEndResult.data)
-    }, [handleEndResult])
+        setHandleEndDate(handleDateResult.data)
+    }, [handleDateResult])
 
 
     useEffect(()=>{

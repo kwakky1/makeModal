@@ -1,17 +1,17 @@
-const END_RESULT = 'END_RESULT'
+const DATE_RESULT = 'DATE_RESULT'
 
 export const endAction = data => ({
-    type: END_RESULT,
+    type: DATE_RESULT,
     data: data
 })
 
-const EndReducer = (state=false, action) => {
+const DateReducer = (state=false, action) => {
     switch (action.type){
-        case END_RESULT :
+        case DATE_RESULT :
             return {data: action.data}
         default :
             return state
     }
 };
 
-export default EndReducer;
+export default DateReducer;
