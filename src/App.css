@@ -48,10 +48,10 @@
 .Wrapper {
   box-sizing: border-box;
   position: absolute;
-  top: 200px;
+  top: 230px;
   right: 0;
   bottom: 0;
-  left: 200px;
+  left: 485px;
   z-index: 1001;
   background-color: #ffffff;
   width: 824px;
@@ -113,7 +113,7 @@
 }
 
 .Box1:hover {
-  background: #efefef;
+  background: #f9f9f9;
 }
 
 .Box2 {
@@ -128,7 +128,7 @@
 }
 
 .Box2:hover {
-  background: #efefef;
+  background: #f9f9f9;
 }
 
 .Date {

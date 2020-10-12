@@ -38,6 +38,8 @@ const Modal = ({handle, setHandle}) => {
             let changeMinute = (Math.round(Number(moment().format('mm')) / 10) *10).toString()
             if(changeMinute === '60') {
                 changeMinute = 0
+            } else if (Number(changeMinute) > 49 ) {
+                changeMinute = 50
             }
             setStartMinute(`${changeMinute}분`)
             setEndMinute(`${changeMinute}분`)
