@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import moment from "moment";
 import forward_arrow from '../img/ic-arrow-forward.svg'
 import back_arrow from '../img/ic-arrow-back.svg'
@@ -7,8 +7,13 @@ const Calender = ({setStartDate, setEndDate, startDate, endDate}) => {
 
     const [today, setToday] = useState(moment())
     const [range] = useState([])
+
+    useEffect(()=>{
+        range.push(startDate)
+    },[])
+
     const generate = () => {
-        const date = setStartDate ? moment(startDate) : moment(endDate)
+        const date = moment(startDate)
         const yesterday = moment().add(-1, "day")
         const startWeek = today.clone().startOf('month').isoWeek() >= 52 ? 0 : today.clone().startOf('month').isoWeek();
         const endWeek = today.clone().endOf('month').isoWeek() === 1 ? 53 : today.clone().endOf('month').isoWeek();
@@ -19,7 +24,7 @@ const Calender = ({setStartDate, setEndDate, startDate, endDate}) => {
                     {
                         Array(7).fill(0).map((n, i) => {
                             let current = today.clone().isoWeek(week).startOf('isoWeek').add(n + i, 'day')
-                            let isSelected = (startDate.format("YYYYMMDD") !== endDate.format('YYYYMMDD')) && (date.format('YYYYMMDD') === current.format('YYYYMMDD') || (current >= startDate && current <= endDate)) ? 'selected' : '';
+                            let isSelected = (date.format('YYYYMMDD') === current.format('YYYYMMDD') || (current >= startDate && current <= endDate)) ? 'selected' : '';
                             let isGrayed = current.format('MM') !== today.format('MM') || yesterday > current ? 'grayed' : '';
                             const setting = () => {
                                 if(range.length === 1) {
